@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "buzz-dev-mcp": {
+      "command": "node",
+      "args": ["/Users/arajiv/.cargo/bin/buzz-dev-mcp"],
+      "env": {
+        "BUZZ_SHELL": "/bin/zsh"
+      }
+    },
+    "smmfactory-mcp": {
+      "command": "node",
+      "args": ["/Users/arajiv/SMMFactory/tools/mcp-server.mjs"],
+      "env": {
+        "SEMRUSH_API_KEY": "${SEMRUSH_API_KEY}",
+        "SERANKING_API_KEY": "${SERANKING_API_KEY}",
+        "GCP_SA_KEY": "${GCP_SA_KEY}"
+      }
+    }
+  }
+}

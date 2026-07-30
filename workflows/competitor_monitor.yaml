@@ -1,0 +1,20 @@
+name: CompetitorMonitorWorkflow
+id: competitor-monitor-workflow
+description: Weekly automated web, ad, and search positioning audit.
+trigger:
+  type: cron
+  schedule: "0 0 * * 1" # Every Monday at 00:00 UTC
+steps:
+  - step: 1
+    agent: seo-intel-agent
+    action: run_full_competitor_scan
+    output: weekly_seo_intel.json
+  - step: 2
+    agent: growth-analyst-agent
+    input: weekly_seo_intel.json
+    action: extract_competitive_shifts
+    output: competitive_report
+  - step: 3
+    action: post_nostr_event
+    channel: marketing-ops
+    content: competitive_report

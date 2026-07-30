@@ -1,0 +1,29 @@
+name: SoftwareCICDWorkflow
+id: software-ci-cd-workflow
+description: Reactive CI/CD pipeline triggered by @Architect channel mention or PR creation.
+trigger:
+  type: event
+  events:
+    - channel_mention: "@Architect"
+    - channel_mention: "@Developer"
+    - github_pr_event: "opened"
+steps:
+  - step: 1
+    agent: architect-agent
+    action: analyze_and_decompose
+    output: task_brief
+  - step: 2
+    agent: developer-agent
+    input: task_brief
+    action: create_branch_and_write_code
+    output: pull_request
+  - step: 3
+    agent: qa-gatekeeper-agent
+    input: pull_request
+    action: run_tests_and_four_eyes_review
+    gate:
+      require_pass: true
+  - step: 4
+    agent: devops-agent
+    action: merge_and_deploy_staging
+    notify_channel: engineering

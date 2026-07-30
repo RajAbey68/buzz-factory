@@ -1,0 +1,36 @@
+name: CampaignLaunchGateWorkflow
+id: campaign-launch-gate-workflow
+description: End-to-end 8-phase SMMFactory campaign creation & Four-Eyes deployment gate.
+trigger:
+  type: event
+  events:
+    - channel_mention: "@SEOIntelAgent"
+    - channel_mention: "@AdDeployer"
+steps:
+  - step: 1
+    agent: seo-intel-agent
+    action: run_seo_scan
+    skill: smmfactory-seo
+    output: seo_intel.json
+  - step: 2
+    agent: creative-copywriter-agent
+    input: seo_intel.json
+    action: generate_proof_based_copy
+    skill: smmfactory-ai-analyst
+    output: ai_analysis.json
+  - step: 3
+    agent: ad-deployer-agent
+    input: ai_analysis.json
+    action: construct_draft_campaigns
+    skill: smmfactory-ad-deployer
+    output: Campaign_Summary.md
+  - step: 4
+    agent: qa-gatekeeper-agent # P-3 Four-Eyes non-Anthropic review pass
+    input: Campaign_Summary.md
+    action: audit_copy_and_budget
+    gate:
+      require_pass: true
+  - step: 5
+    action: request_human_attestation
+    channel: marketing-ops
+    message: "Campaign summary ready for production launch approval."

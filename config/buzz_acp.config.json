@@ -1,0 +1,22 @@
+{
+  "acp_version": "1.0",
+  "relay_url": "wss://devserver.local:8080",
+  "harnesses": {
+    "hermes": {
+      "type": "hermes-agent-os",
+      "server": "devserver.hostinger",
+      "gateway_endpoint": "http://devserver.local:8090/v1/agent",
+      "skills_dir": "./hermes_skills"
+    },
+    "ollama": {
+      "type": "ollama-local",
+      "endpoint": "http://devserver.local:11434",
+      "default_model": "gemma3:4b"
+    },
+    "claude-code": {
+      "type": "claude-code-cli",
+      "model": "claude-3-7-sonnet-20250219"
+    }
+  },
+  "default_harness": "hermes"
+}

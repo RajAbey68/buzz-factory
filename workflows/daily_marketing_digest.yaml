@@ -1,0 +1,20 @@
+name: DailyMarketingDigestWorkflow
+id: daily-marketing-digest-workflow
+description: Scheduled workflow compiling daily growth analytics and performance updates.
+trigger:
+  type: cron
+  schedule: "0 8 * * *" # Every day at 08:00 UTC
+steps:
+  - step: 1
+    agent: growth-analyst-agent
+    action: aggregate_metrics
+    output: metrics_digest
+  - step: 2
+    agent: creative-copywriter-agent
+    input: metrics_digest
+    action: format_briefing
+    output: briefing_text
+  - step: 3
+    action: post_nostr_event
+    channel: marketing-ops
+    content: briefing_text
