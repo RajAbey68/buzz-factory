@@ -1,11 +1,16 @@
-# Project Rules — Mama Obsidian Vault Sync & Ollama Local Inference
+# Project Rules — TDD BMAD & Asimov-AI Governance Framework
 
-## 1. Mama Obsidian Vault Persistence Rule
-All agent factories (**Software Factory**, **SMMFactory**, **AutHarvest**) MUST maintain persistent, bidirectionally readable Markdown sync to the **Mama Obsidian Vault** (`/Users/arajiv/Documents/Obsidian Vault` / `/Users/arajiv/second-brain`).
+## 1. TDD BMAD Methodology (Behavioral Model-Driven Agentic Development)
+All agent software development in `buzz-factory` MUST follow strict TDD BMAD principles:
+- **Behavioral Modeling (BMAD):** Every feature or agent workflow MUST begin with a formal behavioral specification defining state transitions, schema contracts, and failure boundaries (`@SystemArchitect`).
+- **Test-Driven Development (TDD):** `@FeatureDeveloper` MUST write failing automated unit tests *before* writing production implementation code. No feature PR may be submitted without accompanying test suites.
+- **Verification Gate:** `@QAGatekeeper` runs tests in an isolated workspace, verifying 100% pass rates and schema compliance before merge approval.
 
-- **Formatting Requirement:** All agent logs, campaign summaries, job match digests, and architectural decisions MUST be written in strict, clean CommonMark Markdown with YAML frontmatter.
-- **Ollama RAG Compatibility:** Markdown structures MUST use standard section headers (`#`, `##`), clean bulleting, and explicit metadata keys so local Ollama instances (`gemma3:4b` / `llama3.3`) can index, search, and perform local RAG reasoning over the vault.
-- **Zero Supercession:** Vault sync is a mandatory **Project Constraint** integrated into factory workflows (`workflows/*.yaml`), never a separate or optional manual step.
+## 2. Asimov-AI Governance Method (Safety, Ethics & Self-Correction)
+All 3 agent fleets (**Software**, **Marketing**, **AutHarvest**) operate under the Asimov-AI Method:
+- **First Law (System Safety & Non-Harm):** Self-healing watchdogs (`gateway_heartbeat.py`) enforce rate-limited process restarts (max 5/day). PII transport MUST use NIP-17 Gift-Wrap (`kind: 1059`) encryption.
+- **Second Law (Human Intent & Ethical Bounds):** Agents stage actions but NEVER auto-submit. Humans retain absolute decision authority via 1-click Nostr action cards (`📌 Pocket` vs `⚡ Launch`). CV generation MUST enforce zero-hallucination provenance against `ruvector.db`.
+- **Third Law (Self-Preservation & Auditability):** All agent turns, campaign outputs, and architectural diffs MUST persistently sync to the **Mama Obsidian Vault** (`~/second-brain/inbox/buzz-digest.md`) formatted for local Ollama RAG.
 
-## 2. LiteLLM Proxy Routing Rule
-- If any proxy routing configuration is required for `agy` or LiteLLM endpoints on port 4000, ensure base URL routing uses verified OpenRouter or local Ollama endpoints rather than deprecated/broken provider paths.
+## 3. LiteLLM & Gateway Proxy Rules
+- All gateway and model routing configuration MUST use verified OpenRouter or local Ollama endpoints (`gemma3:4b` / `qwen-3.7-plus`), preventing broken provider paths.

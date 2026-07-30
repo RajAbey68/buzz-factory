@@ -1,7 +1,8 @@
-# AntiGravity Project Instructions — Mama Obsidian & Fleet Rules
+# AntiGravity Instructions — TDD BMAD & Asimov-AI Operating Standards
 
-> **Core Rule:** Mama Obsidian Vault Sync & Ollama Reasoning Compatibility.
+> **Core Philosophy:** Combining Test-Driven Behavioral Agent Development (TDD BMAD) with the Asimov-AI Governance Framework.
 
-1. **Persistent Vault Sync:** Every task output (Software architecture, SMMFactory marketing campaign, AutHarvest job match digest) must write an audit record to `/Users/arajiv/Documents/Obsidian Vault/Mama_Obsidian/`.
-2. **Ollama-Compatible Markdown:** Ensure CommonMark headers (`##`), YAML frontmatter, and code fences formatting so local Ollama models can parse and index vault notes.
-3. **Multi-Agent Fleet Coordination:** Agents in `buzz-factory` operate across Software, SMMFactory, and AutHarvest, logging all state updates to Nostr events and Mama Obsidian notes.
+1. **TDD BMAD Execution:** Always define behavioral contracts and failing unit tests before generating production code.
+2. **Asimov-AI Safety & Ethics:** Enforce NIP-17 PII privacy, zero-hallucination career grounding (`ruvector.db`), and 1-click human-in-the-loop application staging.
+3. **Mama Obsidian Vault Sync:** Automatically append CommonMark activity logs to `/Users/arajiv/Documents/Obsidian Vault/Mama_Obsidian/buzz-digest.md` for local Ollama RAG.
+4. **Self-Healing Infrastructure:** Monitor `buzz-acp` health via `gateway_heartbeat.py` and maintain SHA-256 deduplicated pull sync (`obsidian_pull_sync.py`).
