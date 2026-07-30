@@ -1,23 +1,23 @@
-# Implementation Plan — AutHarvest: Human-in-the-Loop Job Hunter & Application Staging in Buzz
+# Implementation Plan — AutHarvest & SMMFactory: Human-in-the-Loop Fleet in Buzz
 
 > **Target Platform:** Buzz ([buzz.xyz](https://buzz.xyz) / [github.com/block/buzz](https://github.com/block/buzz))  
-> **Source Base:** [AutumnHarvest Repository](file:///Users/arajiv/AutumnHarvest) (`ingest_jobs.py`, `job_scorer.py`, `cv_generator.py`, `daily_summary.py`)  
+> **Source Base:** [AutumnHarvest Repository](file:///Users/arajiv/AutumnHarvest) & [SMMFactory Repository](file:///Users/arajiv/SMMFactory)  
 > **Agent OS:** **Hermes Agent OS** running on **`devserver` (Hostinger)**  
-> **Architecture Core:** Multi-agent autonomous discovery, fact-grounded CV tailoring, NIP-44 encrypted Nostr channel notifications, and Human-in-the-Loop decision gating ("Pocket" vs "Action/Apply").
+> **Architecture Core:** Multi-agent autonomous discovery, fact-grounded CV tailoring, micro-budget marketing governance (£200 August hard cap), NIP-44 encrypted Nostr notifications, and Human-in-the-Loop decision gating ("Pocket" vs "Action/Apply").
 
 ---
 
 ## 0. Philosophy & Core Architecture: Human-in-the-Loop Assist
 
-**AutHarvest** is **not** an ungated auto-submission bot. It is an **autonomous agent force multiplier** designed to find candidate roles, evaluate match scores against your target criteria, and generate tailored `.docx`/PDF resumes—leaving you in complete control to:
-1. **Browse & Filter:** Review matched job opportunities in your `#job-hunter` Buzz channel.
-2. **Pocket or Act:** Decide whether to pocket a role for later, dismiss it, or trigger 1-click application staging.
+**AutHarvest & SMMFactory** are **not** ungated auto-submission or runaway ad spend bots. They are **autonomous agent force multipliers** designed to find candidate roles, score matches, generate tailored resumes, and draft paid media campaigns—leaving you in complete control to:
+1. **Browse & Filter:** Review matched job opportunities in `#job-hunter` and ad campaign drafts in `#marketing-ops`.
+2. **Pocket or Act:** Decide whether to pocket a role for later, dismiss it, or trigger 1-click application staging or ad deployment.
 3. **5-Second Assist:** Open your authenticated browser with pre-filled fields and tailored CV attached for instant final review and submission.
 
 ```
                       ┌─────────────────────────────────────────┐
                       │    Buzz Workspace / Nostr Relay         │
-                      │   #job-hunter  •  #career-ops  •  DMs   │
+                      │ #engineering • #marketing-ops • #job-hunter│
                       └────────────────────┬────────────────────┘
                                            │ Nostr WebSocket (NIP-44 Encrypted)
                                            ▼
@@ -33,10 +33,9 @@
         ┌─────────────────────▼─┐   ┌───────▼─────────────┐   ┌───▼──────────────────┐
         │ Software Factory      │   │ Marketing Factory   │   │ AutHarvest Job Hunter│
         ├───────────────────────┤   ├─────────────────────┤   ├──────────────────────┤
-        │ • @SystemArchitect    │   │ • @GrowthAnalyst    │   │ • @JobScanner        │
-        │ • @FeatureDeveloper   │   │ • @SEOIntelAgent    │   │ • @MatchScorer       │
-        │ • @QAGatekeeper (P-3) │   │ • @CreativeCopywriter│  │ • @CVTailor          │
-        │ • @DevOpsRelease      │   │ • @AdDeployer       │   │ • @ApplyAssistant    │
+        │ • @SystemArchitect    │   │ • @FeatureDeveloper │   │ • @JobScanner        │
+        │ • @QAGatekeeper (P-3) │   │ • @CreativeCopywriter│  │ • @MatchScorer       │
+        │ • @DevOpsRelease      │   │ • @AdDeployer       │   │ • @CVTailor          │
         └───────────────────────┘   └─────────────────────┘   └──────────┬───────────┘
                                                                          │
                                                                          ▼
@@ -58,7 +57,17 @@ All incoming job postings are evaluated against your core target profile:
 
 ---
 
-## 2. Security, Fact-Grounding & Mama Obsidian Rules
+## 2. SMMFactory August Micro-Budget Rules (£200 Hard Cap)
+
+- **Total August Ad Spend Cap:** **£200.00 Max** (Zero Overrun).
+- **Meta Ads Retargeting:** **£140** (£5/day for 28 days) — Warm traffic & UK/UAE Sri Lanka expats ONLY.
+- **Google Search Exact Match:** **£60** (£3/day for 20 days) — Exact match `[private villa ahangama group]` ONLY.
+- **Direct Booking Incentive:** Complimentary Welcome Sunset Dinner prepared by private villa chef (Zero cash transfer perk).
+- **Organic Engine (£0):** Past guest WhatsApp broadcast + 12 organic IG reels/posts via `@CreativeCopywriter`.
+
+---
+
+## 3. Security, Fact-Grounding & Mama Obsidian Rules
 
 1. **Mama Obsidian Vault Persistence (Project Constraint):** All agent factories (**Software Factory**, **SMMFactory**, **AutHarvest**) MUST automatically log structured Markdown summaries to the **Mama Obsidian Vault** (`/Users/arajiv/Documents/Obsidian Vault/Mama_Obsidian/` / `/Users/arajiv/second-brain/`).
 2. **Ollama-Obsidian Compatibility:** Markdown documents MUST strictly format headers, YAML frontmatter, and bullet lists for local Ollama (`gemma3:4b` / `llama3.3`) RAG indexing and reasoning.
@@ -68,7 +77,7 @@ All incoming job postings are evaluated against your core target profile:
 
 ---
 
-## 3. Directory & File Structure in `buzz-factory`
+## 4. Directory & File Structure in `buzz-factory`
 
 ```
 buzz-factory/
@@ -80,18 +89,8 @@ buzz-factory/
 │   ├── software_factory/
 │   ├── marketing_factory/
 │   └── aut_harvest/
-│       ├── job_scanner.yaml        # Discovers jobs from PhantomBuster/Gmail/APIs
-│       ├── match_scorer.yaml       # AI Scoring against £80K+/£600+day criteria
-│       ├── cv_tailor.yaml          # Generates tailored .docx / PDF resumes (Fact-grounded)
-│       └── apply_assistant.yaml    # Application dossier & 1-click launcher
 ├── hermes_skills/
-│   ├── aut_harvest_ingest/         # Ingestion skill wrapping AutumnHarvest scripts
-│   ├── aut_harvest_cv_gen/         # Tailored CV generator skill (python-docx + diff check)
-│   ├── aut_harvest_assist/         # Application dossier & browser pre-fill assistant
-│   └── aut_harvest_nip44/          # Encrypted Nostr event notification skill
 ├── workflows/
-│   ├── aut_harvest_morning_routine.yaml # Daily Cron (07:00 UTC): Scan -> Score -> Digest -> Obsidian Sync
-│   └── aut_harvest_stage_application.yaml # Reactive: Score >= 4.0 -> Tailor CV -> Stage Card
 ├── config/
 │   └── aut_harvest_profile.json    # Target profile rules, skills matrix, resume paths
 └── README.md
@@ -99,7 +98,7 @@ buzz-factory/
 
 ---
 
-## 4. Verification & Testing Plan
+## 5. Verification & Testing Plan
 
 ### Automated Tests
 1. **Mama Obsidian Vault Sync Test:** Verify job digests, software release notes, and marketing reports write cleanly to `/Users/arajiv/Documents/Obsidian Vault/Mama_Obsidian/`.
