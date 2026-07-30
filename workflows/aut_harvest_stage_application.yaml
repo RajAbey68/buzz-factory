@@ -1,0 +1,25 @@
+name: AutHarvestStageApplicationWorkflow
+id: aut-harvest-stage-application-workflow
+description: Reactive workflow triggered when a job is shortlisted or requested for application staging.
+trigger:
+  type: event
+  events:
+    - channel_mention: "@CVTailor"
+    - channel_mention: "@ApplyAssistant"
+    - job_shortlisted: "score >= 4.0"
+steps:
+  - step: 1
+    agent: cv-tailor-agent
+    action: synthesize_tailored_cv_and_cover_letter
+    skill: aut-harvest-cv-gen
+    output: cv_and_cl_files
+  - step: 2
+    agent: apply-assistant-agent
+    input: cv_and_cl_files
+    action: assemble_dossier_and_launcher
+    skill: aut-harvest-assist
+    output: application_dossier
+  - step: 3
+    action: publish_nip44_action_card
+    skill: aut-harvest-nip44
+    channel: job-hunter

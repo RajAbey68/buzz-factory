@@ -1,0 +1,28 @@
+{
+  "candidate": {
+    "name": "Rajiv Abeysinghe",
+    "experience_years": 27,
+    "target_roles": [
+      "Senior AI Governance Architect",
+      "AI Solutions Architect",
+      "Enterprise Architect",
+      "Technical Lead"
+    ],
+    "compensation": {
+      "min_permanent_salary_gbp": 80000,
+      "min_contract_day_rate_gbp": 600
+    },
+    "location_preferences": ["Remote", "United Kingdom", "European Union"],
+    "min_shortlist_score": 4.0
+  },
+  "dossier_defaults": {
+    "notice_period": "30 days",
+    "work_authorization": "UK Citizen / Full Right to Work",
+    "elevator_pitch": "27-year Enterprise & AI Solutions Architect specializing in AI Governance, multi-agent autonomous fleet orchestration, and cloud-native solutions."
+  },
+  "source_base": {
+    "autumn_harvest_path": "/Users/arajiv/AutumnHarvest",
+    "database": "supabase",
+    "ground_truth_resume_db": "/Users/arajiv/AutumnHarvest/ruvector.db"
+  }
+}

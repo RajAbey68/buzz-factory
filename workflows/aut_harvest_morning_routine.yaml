@@ -1,0 +1,29 @@
+name: AutHarvestMorningRoutineWorkflow
+id: aut-harvest-morning-routine-workflow
+description: Autonomous daily job discovery, scoring, and staging pipeline.
+trigger:
+  type: cron
+  schedule: "0 7 * * *" # Every day at 07:00 UTC
+steps:
+  - step: 1
+    agent: job-scanner-agent
+    action: run_batch_ingestion
+    skill: aut-harvest-ingest
+    output: new_job_ids
+  - step: 2
+    agent: match-scorer-agent
+    input: new_job_ids
+    action: score_and_shortlist_jobs
+    output: shortlisted_jobs
+  - step: 3
+    agent: cv-tailor-agent
+    input: shortlisted_jobs
+    action: generate_fact_grounded_cvs
+    skill: aut-harvest-cv-gen
+    output: tailored_assets
+  - step: 4
+    agent: apply-assistant-agent
+    input: tailored_assets
+    action: publish_encrypted_digest
+    skill: aut-harvest-nip44
+    notify_channel: job-hunter
